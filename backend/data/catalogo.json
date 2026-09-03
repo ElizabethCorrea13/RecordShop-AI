@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "nombre": "Kind of Blue",
+    "artista": "Miles Davis",
+    "formato": "vinilo",
+    "genero": "jazz",
+    "precio": 34.99,
+    "stock": 12
+  },
+  {
+    "id": 2,
+    "nombre": "Rumours",
+    "artista": "Fleetwood Mac",
+    "formato": "vinilo",
+    "genero": "rock",
+    "precio": 29.99,
+    "stock": 7
+  },
+  {
+    "id": 3,
+    "nombre": "Discovery",
+    "artista": "Daft Punk",
+    "formato": "cd",
+    "genero": "electronica",
+    "precio": 14.99,
+    "stock": 0
+  },
+  {
+    "id": 4,
+    "nombre": "Blue Train",
+    "artista": "John Coltrane",
+    "formato": "cd",
+    "genero": "jazz",
+    "precio": 12.99,
+    "stock": 20
+  }
+]

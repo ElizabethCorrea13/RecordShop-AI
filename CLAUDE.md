@@ -58,11 +58,24 @@ Full-stack developer con 2 años de experiencia, cursando Licenciatura en Cienci
 - [x] Alcance definido
 - [x] Stack elegido
 - [ ] Repo de GitHub creado
-- [ ] Estructura de carpetas inicial
-- [ ] Backend: endpoint básico de FastAPI
+- [x] Estructura de carpetas inicial
+- [x] Backend: endpoint básico de FastAPI (`GET /health`)
 - [ ] Backend: integración con Gemini API
-- [ ] Catálogo ficticio de productos (JSON)
+- [~] Catálogo ficticio de productos (JSON) — hay `data/catalogo.json` con 4 items de ejemplo; todavía no se sirve por la API
 - [ ] Frontend: interfaz de chat básica
-- [ ] Conectar frontend con backend
+- [~] Conectar frontend con backend — el frontend ya hace ping a `/health` y muestra el estado de conexión; falta el chat
 - [ ] README completo
 - [ ] Deploy (a definir: Vercel para front, Render para back)
+
+### Cómo correrlo localmente
+
+Detalle completo en `README.md`. Resumen: dos terminales.
+
+- **Backend:** `cd backend` → activar venv → `uvicorn main:app --reload --port 8001`
+  → API en http://localhost:8001 (docs en `/docs`)
+- **Frontend:** `cd frontend` → `npm run dev` → http://localhost:5173
+
+> **Puerto 8001, no 8000:** en el Windows de la dev el 8000 está reservado por
+> Hyper-V/WSL y `uvicorn` falla con `WinError 10013`. El repo usa 8001 como
+> default (`.env.example`, fallback en `App.jsx`, READMEs). CORS acepta cualquier
+> puerto de `localhost` para tolerar que Vite salte de puerto.

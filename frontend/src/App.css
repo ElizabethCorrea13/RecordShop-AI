@@ -1,0 +1,46 @@
+.app {
+  max-width: 640px;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+}
+
+h1 {
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
+  color: #555;
+  margin-top: 0;
+}
+
+.status {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.status--checking {
+  background: #f0f0f0;
+  color: #555;
+}
+
+.status--ok {
+  background: #e3f6e5;
+  color: #1a7f37;
+}
+
+.status--error {
+  background: #fde5e5;
+  color: #b42318;
+}
+
+.placeholder {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  color: #888;
+  text-align: center;
+}
