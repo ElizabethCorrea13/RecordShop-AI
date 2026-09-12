@@ -120,6 +120,7 @@ consume. Todavía falta la integración con Gemini y la interfaz de chat.
 - Producto sin usar, en empaque original
 - Vinilos: sello de calidad no debe estar roto
 - Reembolso en 5-10 días hábiles
+- Productos en oferta/liquidación: sin devolución, solo cambio
 
 ### Por qué el catálogo se pasa completo en cada consulta
 
