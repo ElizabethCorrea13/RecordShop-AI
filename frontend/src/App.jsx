@@ -6,11 +6,15 @@ import './App.css'
 // Se puede sobreescribir con la variable de entorno VITE_API_URL (ver .env.example).
 const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8001'
 
+const STATUS_LABEL = {
+  checking: 'verificando…',
+  ok: 'conectado',
+  error: 'sin conexión',
+}
+
 function App() {
-  // Estado del backend: 'checking' | 'ok' | 'error'
-  // Por ahora el frontend sólo hace un ping a /health para verificar que
-  // la conexión front <-> back funciona. El chat y la integración con
-  // Gemini se agregan más adelante.
+  // Estado del backend: 'checking' | 'ok' | 'error'. Se usa para habilitar el
+  // chat y para mostrarle al usuario si el backend está disponible.
   const [backendStatus, setBackendStatus] = useState('checking')
 
   useEffect(() => {
@@ -22,23 +26,32 @@ function App() {
 
   return (
     <main className="app">
-      <h1>RecordShop AI</h1>
-      <p className="subtitle">
-        Chatbot de soporte para una tienda de CDs y vinilos.
-      </p>
+      <header className="app__header">
+        <div className="app__title-row">
+          <span className="app__logo" aria-hidden="true">
+            💿
+          </span>
+          <div>
+            <h1>RecordShop AI</h1>
+            <p className="app__subtitle">
+              Chatbot de soporte para una tienda de CDs y vinilos
+            </p>
+          </div>
+        </div>
 
-      <p className={`status status--${backendStatus}`}>
-        Backend:{' '}
-        {backendStatus === 'checking' && 'verificando…'}
-        {backendStatus === 'ok' && 'conectado'}
-        {backendStatus === 'error' && 'sin conexión'}
-      </p>
+        <span className={`badge badge--${backendStatus}`}>
+          <span className="badge__dot" />
+          Backend {STATUS_LABEL[backendStatus]}
+        </span>
+      </header>
 
       {backendStatus === 'ok' ? (
         <Chat apiUrl={API_URL} />
       ) : (
-        <p className="placeholder">
-          El chat necesita que el backend esté corriendo (ver estado arriba).
+        <p className="app__placeholder">
+          {backendStatus === 'checking'
+            ? 'Conectando con el servidor…'
+            : 'El chat necesita que el backend esté corriendo (ver estado arriba).'}
         </p>
       )}
     </main>

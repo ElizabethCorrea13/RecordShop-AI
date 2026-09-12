@@ -1,8 +1,36 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --color-bg: #faf6f1;
+  --color-surface: #ffffff;
+  --color-text: #241c15;
+  --color-text-muted: #8a7d6f;
+  --color-border: #e8e0d6;
+
+  --color-accent: #c2410c;
+  --color-accent-hover: #9a340a;
+  --color-accent-contrast: #ffffff;
+
+  --color-bubble-assistant: #f1ece3;
+  --color-bubble-user: var(--color-accent);
+
+  --color-success-bg: #e3f6e5;
+  --color-success-text: #1a7f37;
+  --color-error-bg: #fde5e5;
+  --color-error-text: #b42318;
+  --color-neutral-bg: #f0ede8;
+  --color-neutral-text: #6b6259;
+
+  --font-display: 'Poppins', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --shadow-card: 0 1px 3px rgba(36, 28, 21, 0.06), 0 8px 24px rgba(36, 28, 21, 0.06);
+
+  font-family: var(--font-body);
   line-height: 1.5;
-  color: #1a1a1a;
-  background-color: #ffffff;
+  color: var(--color-text);
+  background-color: var(--color-bg);
 }
 
 * {
