@@ -5,8 +5,9 @@
     "artista": "Miles Davis",
     "formato": "vinilo",
     "genero": "jazz",
-    "precio": 34.99,
-    "stock": 12
+    "precio": 9800,
+    "stock": 12,
+    "descripcion": "Uno de los álbumes de jazz más influyentes de la historia, grabado en 1959."
   },
   {
     "id": 2,
@@ -14,8 +15,9 @@
     "artista": "Fleetwood Mac",
     "formato": "vinilo",
     "genero": "rock",
-    "precio": 29.99,
-    "stock": 7
+    "precio": 8900,
+    "stock": 7,
+    "descripcion": "Clásico del rock de los 70, con algunos de los temas más reconocidos de la banda."
   },
   {
     "id": 3,
@@ -23,8 +25,9 @@
     "artista": "Daft Punk",
     "formato": "cd",
     "genero": "electronica",
-    "precio": 14.99,
-    "stock": 0
+    "precio": 5400,
+    "stock": 0,
+    "descripcion": "Álbum icónico de electrónica de principios de los 2000, actualmente agotado."
   },
   {
     "id": 4,
@@ -32,7 +35,48 @@
     "artista": "John Coltrane",
     "formato": "cd",
     "genero": "jazz",
-    "precio": 12.99,
-    "stock": 20
+    "precio": 4900,
+    "stock": 20,
+    "descripcion": "Grabación de 1957 considerada una obra maestra del hard bop."
+  },
+  {
+    "id": 5,
+    "nombre": "Abbey Road",
+    "artista": "The Beatles",
+    "formato": "vinilo",
+    "genero": "rock",
+    "precio": 10500,
+    "stock": 1,
+    "descripcion": "Último álbum grabado por la banda, última unidad disponible en stock."
+  },
+  {
+    "id": 6,
+    "nombre": "Random Access Memories",
+    "artista": "Daft Punk",
+    "formato": "vinilo",
+    "genero": "electronica",
+    "precio": 11200,
+    "stock": 5,
+    "descripcion": "Álbum de 2013 con colaboraciones destacadas, edición doble vinilo."
+  },
+  {
+    "id": 7,
+    "nombre": "Random Access Memories",
+    "artista": "Daft Punk",
+    "formato": "cd",
+    "genero": "electronica",
+    "precio": 5900,
+    "stock": 15,
+    "descripcion": "Misma grabación que la edición en vinilo, en formato CD."
+  },
+  {
+    "id": 8,
+    "nombre": "Buena Vista Social Club",
+    "artista": "Buena Vista Social Club",
+    "formato": "cd",
+    "genero": "world music",
+    "precio": 4700,
+    "stock": 9,
+    "descripcion": "Grabación de 1997 que revitalizó la música tradicional cubana a nivel mundial."
   }
 ]

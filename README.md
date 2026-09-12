@@ -85,3 +85,21 @@ consume. Todavía falta la integración con Gemini y la interfaz de chat.
   desarrollo.
 - **La API key de Gemini vive en `backend/.env`** — nunca hardcodeada ni
   commiteada; `.env.example` queda como plantilla.
+
+### Políticas de la tienda (ficticias, para este proyecto)
+
+**Envíos:**
+- Estándar: 5-7 días hábiles, $1500
+- Express: 2-3 días hábiles, $3500
+- Gratis en compras +$15000
+- Cobertura: todo el país
+
+**Devoluciones:**
+- 30 días desde la recepción
+- Producto sin usar, en empaque original
+- Vinilos: sello de calidad no debe estar roto
+- Reembolso en 5-10 días hábiles
+
+### Por qué el catálogo se pasa completo en cada consulta
+
+Con 10 productos es simple pasarle todo el catálogo al modelo en cada llamada. No escala a catálogos grandes — esa limitación se resuelve en el Proyecto 2 con RAG (retrieval en vez de mandar todo siempre).
