@@ -1,82 +1,82 @@
 [
   {
     "id": 1,
-    "nombre": "Kind of Blue",
-    "artista": "Miles Davis",
-    "formato": "vinilo",
-    "genero": "jazz",
-    "precio": 9800,
+    "name": "Kind of Blue",
+    "artist": "Miles Davis",
+    "format": "vinyl",
+    "genre": "jazz",
+    "price": 9800,
     "stock": 12,
-    "descripcion": "Uno de los álbumes de jazz más influyentes de la historia, grabado en 1959."
+    "description": "One of the most influential jazz albums in history, recorded in 1959."
   },
   {
     "id": 2,
-    "nombre": "Rumours",
-    "artista": "Fleetwood Mac",
-    "formato": "vinilo",
-    "genero": "rock",
-    "precio": 8900,
+    "name": "Rumours",
+    "artist": "Fleetwood Mac",
+    "format": "vinyl",
+    "genre": "rock",
+    "price": 8900,
     "stock": 7,
-    "descripcion": "Clásico del rock de los 70, con algunos de los temas más reconocidos de la banda."
+    "description": "A rock classic from the '70s, featuring some of the band's most well-known songs."
   },
   {
     "id": 3,
-    "nombre": "Discovery",
-    "artista": "Daft Punk",
-    "formato": "cd",
-    "genero": "electronica",
-    "precio": 5400,
+    "name": "Discovery",
+    "artist": "Daft Punk",
+    "format": "CD",
+    "genre": "electronic",
+    "price": 5400,
     "stock": 0,
-    "descripcion": "Álbum icónico de electrónica de principios de los 2000, actualmente agotado."
+    "description": "An iconic early-2000s electronic album, currently out of stock."
   },
   {
     "id": 4,
-    "nombre": "Blue Train",
-    "artista": "John Coltrane",
-    "formato": "cd",
-    "genero": "jazz",
-    "precio": 4900,
+    "name": "Blue Train",
+    "artist": "John Coltrane",
+    "format": "CD",
+    "genre": "jazz",
+    "price": 4900,
     "stock": 20,
-    "descripcion": "Grabación de 1957 considerada una obra maestra del hard bop."
+    "description": "A 1957 recording considered a hard bop masterpiece."
   },
   {
     "id": 5,
-    "nombre": "Abbey Road",
-    "artista": "The Beatles",
-    "formato": "vinilo",
-    "genero": "rock",
-    "precio": 10500,
+    "name": "Abbey Road",
+    "artist": "The Beatles",
+    "format": "vinyl",
+    "genre": "rock",
+    "price": 10500,
     "stock": 1,
-    "descripcion": "Último álbum grabado por la banda, última unidad disponible en stock."
+    "description": "The last album the band recorded together; last unit available in stock."
   },
   {
     "id": 6,
-    "nombre": "Random Access Memories",
-    "artista": "Daft Punk",
-    "formato": "vinilo",
-    "genero": "electronica",
-    "precio": 11200,
+    "name": "Random Access Memories",
+    "artist": "Daft Punk",
+    "format": "vinyl",
+    "genre": "electronic",
+    "price": 11200,
     "stock": 5,
-    "descripcion": "Álbum de 2013 con colaboraciones destacadas, edición doble vinilo."
+    "description": "A 2013 album featuring standout collaborations, double-vinyl edition."
   },
   {
     "id": 7,
-    "nombre": "Random Access Memories",
-    "artista": "Daft Punk",
-    "formato": "cd",
-    "genero": "electronica",
-    "precio": 5900,
+    "name": "Random Access Memories",
+    "artist": "Daft Punk",
+    "format": "CD",
+    "genre": "electronic",
+    "price": 5900,
     "stock": 15,
-    "descripcion": "Misma grabación que la edición en vinilo, en formato CD."
+    "description": "Same recording as the vinyl edition, on CD."
   },
   {
     "id": 8,
-    "nombre": "Buena Vista Social Club",
-    "artista": "Buena Vista Social Club",
-    "formato": "cd",
-    "genero": "world music",
-    "precio": 4700,
+    "name": "Buena Vista Social Club",
+    "artist": "Buena Vista Social Club",
+    "format": "CD",
+    "genre": "world music",
+    "price": 4700,
     "stock": 9,
-    "descripcion": "Grabación de 1997 que revitalizó la música tradicional cubana a nivel mundial."
+    "description": "A 1997 recording that revived traditional Cuban music on a global scale."
   }
 ]

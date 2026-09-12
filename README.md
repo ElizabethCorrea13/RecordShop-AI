@@ -123,4 +123,4 @@ consume. Todavía falta la integración con Gemini y la interfaz de chat.
 
 ### Por qué el catálogo se pasa completo en cada consulta
 
-Con 10 productos es simple pasarle todo el catálogo al modelo en cada llamada. No escala a catálogos grandes — esa limitación se resuelve en el Proyecto 2 con RAG (retrieval en vez de mandar todo siempre).
+Con 8 productos es simple pasarle todo el catálogo al modelo en cada llamada. No escala a catálogos grandes — esa limitación se resuelve en el Proyecto 2 con RAG (retrieval en vez de mandar todo siempre).
