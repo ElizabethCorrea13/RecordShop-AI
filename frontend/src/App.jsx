@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Chat from './Chat'
 import './App.css'
 
 // URL de la API. En desarrollo apunta al backend de FastAPI en localhost:8001.
@@ -33,7 +34,13 @@ function App() {
         {backendStatus === 'error' && 'sin conexión'}
       </p>
 
-      <p className="placeholder">La interfaz de chat va acá (próximo paso).</p>
+      {backendStatus === 'ok' ? (
+        <Chat apiUrl={API_URL} />
+      ) : (
+        <p className="placeholder">
+          El chat necesita que el backend esté corriendo (ver estado arriba).
+        </p>
+      )}
     </main>
   )
 }

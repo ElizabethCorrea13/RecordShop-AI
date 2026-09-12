@@ -104,9 +104,9 @@ quedan servidores huérfanos corriendo en segundo plano.
 
 ## Estado actual
 
-Backend con `/health` y `/chat` (Gemini ya integrado, arma el prompt con el
-system prompt + catálogo completo). Falta la interfaz de chat en el frontend
-— hoy solo muestra si el backend responde.
+Funcional de punta a punta: backend con `/health` y `/chat` (Gemini
+integrado), y frontend con interfaz de chat que habla con el backend.
+Probado a mano en el navegador. Falta pulir detalles de UI/UX y el deploy.
 
 ## Decisiones técnicas
 

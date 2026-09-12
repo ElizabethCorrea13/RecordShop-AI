@@ -62,8 +62,8 @@ Full-stack developer con 2 años de experiencia, cursando Licenciatura en Cienci
 - [x] Backend: endpoint básico de FastAPI (`GET /health`)
 - [x] Backend: integración con Gemini API — `POST /chat` en `main.py`, arma el prompt en `gemini_client.py` (SDK `google-genai`, modelo `gemini-flash-latest`)
 - [x] Catálogo ficticio de productos (JSON) — `data/catalogo.json` con 8 items, en inglés (mismo idioma que `prompts/system_prompt.py`); se pasa completo en cada request a `/chat`
-- [ ] Frontend: interfaz de chat básica
-- [~] Conectar frontend con backend — el frontend ya hace ping a `/health` y muestra el estado de conexión; falta el chat
+- [x] Frontend: interfaz de chat básica — `Chat.jsx`, mensajes, input, loading y manejo de error
+- [x] Conectar frontend con backend — ping a `/health` para mostrar el estado de conexión y `Chat.jsx` habla con `POST /chat`
 - [ ] README completo
 - [ ] Deploy (a definir: Vercel para front, Render para back)
 
