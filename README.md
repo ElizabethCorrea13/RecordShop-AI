@@ -71,6 +71,27 @@ npm run dev
 
 App en http://localhost:5173. Muestra un indicador de si el backend responde.
 
+### Atajo: levantar todo con un script
+
+Una vez instaladas las dependencias de ambos lados (pasos 1 y 2 de arriba, aunque
+sea una vez), se puede levantar todo con un solo comando desde la raíz:
+
+```powershell
+.\scripts\start-dev.ps1
+```
+
+Abre backend y frontend cada uno en su propia ventana de PowerShell. Para
+frenar los dos de una:
+
+```powershell
+.\scripts\stop-dev.ps1
+```
+
+`stop-dev.ps1` no se limita a mirar qué proceso "dice" Windows que tiene
+ocupado el puerto (`uvicorn --reload` deja procesos hijos que Windows a veces
+reporta mal): mata el árbol completo de procesos de cada ventana, así no
+quedan servidores huérfanos corriendo en segundo plano.
+
 ## Estado actual
 
 Esqueleto funcionando: endpoint `/health` en el backend y app de React que lo

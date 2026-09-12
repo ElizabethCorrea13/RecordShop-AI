@@ -57,7 +57,7 @@ Full-stack developer con 2 años de experiencia, cursando Licenciatura en Cienci
 
 - [x] Alcance definido
 - [x] Stack elegido
-- [ ] Repo de GitHub creado
+- [x] Repo de GitHub creado
 - [x] Estructura de carpetas inicial
 - [x] Backend: endpoint básico de FastAPI (`GET /health`)
 - [ ] Backend: integración con Gemini API
