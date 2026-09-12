@@ -11,7 +11,7 @@ catálogo de productos. Sin pagos reales, sin login, sin memoria entre sesiones
 
 - **Backend:** Python + FastAPI
 - **Frontend:** React + Vite
-- **LLM:** Google Gemini API (nivel gratuito, modelo Flash) — *pendiente de integrar*
+- **LLM:** Google Gemini API (nivel gratuito, modelo Flash)
 
 ## Estructura
 
@@ -19,8 +19,11 @@ catálogo de productos. Sin pagos reales, sin login, sin memoria entre sesiones
 recordshop-ai/
 ├── .env.example          # plantilla de variables de entorno del backend
 ├── backend/              # API FastAPI
-│   ├── main.py           # app + endpoint /health
+│   ├── main.py           # app + endpoints (/health, /chat)
+│   ├── gemini_client.py  # arma el prompt y llama a Gemini
 │   ├── requirements.txt
+│   ├── prompts/
+│   │   └── system_prompt.py
 │   └── data/
 │       └── catalogo.json # catálogo ficticio (datos de ejemplo)
 └── frontend/             # interfaz de chat (React + Vite)
@@ -41,6 +44,7 @@ py -m venv .venv
 .venv\Scripts\Activate.ps1    # Windows (PowerShell)
 # source .venv/bin/activate   # macOS / Linux
 pip install -r requirements.txt
+Copy-Item ..\.env.example .env   # completar GEMINI_API_KEY (gratis en https://aistudio.google.com/apikey)
 uvicorn main:app --reload --port 8001
 ```
 
@@ -58,6 +62,12 @@ Probar el health-check:
 ```bash
 curl http://localhost:8001/health
 # {"status":"ok"}
+```
+
+Probar el chat (requiere `GEMINI_API_KEY` configurada):
+
+```bash
+curl -X POST http://localhost:8001/chat -H "Content-Type: application/json" -d "{\"message\":\"tienen Kind of Blue?\"}"
 ```
 
 ### 2. Frontend
@@ -94,18 +104,26 @@ quedan servidores huérfanos corriendo en segundo plano.
 
 ## Estado actual
 
-Esqueleto funcionando: endpoint `/health` en el backend y app de React que lo
-consume. Todavía falta la integración con Gemini y la interfaz de chat.
+Backend con `/health` y `/chat` (Gemini ya integrado, arma el prompt con el
+system prompt + catálogo completo). Falta la interfaz de chat en el frontend
+— hoy solo muestra si el backend responde.
 
 ## Decisiones técnicas
 
 - **Vite en lugar de Create React App** — CRA está discontinuado; Vite es el
   scaffold recomendado hoy para SPAs de React (arranque y HMR más rápidos).
-- **CORS habilitado sólo para `localhost:5173`** — el navegador bloquea las
-  llamadas entre orígenes distintos; se abre explícitamente el del frontend de
-  desarrollo.
+- **CORS habilitado para cualquier puerto de `localhost`** (`allow_origin_regex`
+  en `backend/main.py`) — el navegador bloquea llamadas entre orígenes
+  distintos, y Vite salta de puerto si el anterior está ocupado; en producción
+  esto habría que restringirlo al dominio real.
 - **La API key de Gemini vive en `backend/.env`** — nunca hardcodeada ni
   commiteada; `.env.example` queda como plantilla.
+- **SDK `google-genai` (no el viejo `google-generativeai`)** — es el paquete
+  que Google mantiene activamente hoy para la API de Gemini.
+- **Modelo fijado por alias (`gemini-flash-latest`), no por versión** — evita
+  tener que tocar código cada vez que Google saca una versión nueva de Flash.
+- **`/chat` no guarda historial** — cada mensaje es independiente; coherente
+  con "sin memoria entre sesiones" (fuera de alcance del proyecto).
 
 ### Políticas de la tienda (ficticias, para este proyecto)
 

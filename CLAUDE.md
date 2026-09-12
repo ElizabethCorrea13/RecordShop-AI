@@ -60,8 +60,8 @@ Full-stack developer con 2 años de experiencia, cursando Licenciatura en Cienci
 - [x] Repo de GitHub creado
 - [x] Estructura de carpetas inicial
 - [x] Backend: endpoint básico de FastAPI (`GET /health`)
-- [ ] Backend: integración con Gemini API
-- [~] Catálogo ficticio de productos (JSON) — hay `data/catalogo.json` con 4 items de ejemplo; todavía no se sirve por la API
+- [x] Backend: integración con Gemini API — `POST /chat` en `main.py`, arma el prompt en `gemini_client.py` (SDK `google-genai`, modelo `gemini-flash-latest`)
+- [x] Catálogo ficticio de productos (JSON) — `data/catalogo.json` con 8 items, en inglés (mismo idioma que `prompts/system_prompt.py`); se pasa completo en cada request a `/chat`
 - [ ] Frontend: interfaz de chat básica
 - [~] Conectar frontend con backend — el frontend ya hace ping a `/health` y muestra el estado de conexión; falta el chat
 - [ ] README completo

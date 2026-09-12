@@ -25,21 +25,37 @@ La API queda en http://localhost:8001. Docs interactivas en http://localhost:800
 
 ## Endpoints
 
-| Método | Ruta      | Respuesta            | Para qué sirve                          |
-|--------|-----------|----------------------|----------------------------------------|
-| GET    | `/health` | `{"status": "ok"}`   | Health-check: probar que el server vive  |
+| Método | Ruta      | Body                    | Respuesta                 | Para qué sirve                                  |
+|--------|-----------|-------------------------|----------------------------|-------------------------------------------------|
+| GET    | `/health` | —                       | `{"status": "ok"}`         | Health-check: probar que el server vive          |
+| POST   | `/chat`   | `{"message": "..."}`    | `{"reply": "..."}`         | Le pasa el mensaje a Gemini junto con el catálogo y el system prompt |
+
+`/chat` no guarda historial entre requests (fuera de alcance del proyecto,
+ver `CLAUDE.md`). Si falta `GEMINI_API_KEY` devuelve 500 con un mensaje claro;
+si Gemini falla (rate limit, red, etc.) devuelve 502.
+
+Probarlo:
+
+```bash
+curl -X POST http://localhost:8001/chat -H "Content-Type: application/json" -d "{\"message\":\"tienen Kind of Blue?\"}"
+```
 
 ## Variables de entorno
 
-Copiar `../.env.example` a `backend/.env` y completar. Por ahora sólo hará falta
-`GEMINI_API_KEY` cuando se integre el LLM (todavía no se usa).
+Copiar `../.env.example` a `backend/.env` y completar:
+
+- `GEMINI_API_KEY` (obligatoria) — se consigue gratis en https://aistudio.google.com/apikey
+- `GEMINI_MODEL` (opcional) — por default usa `gemini-flash-latest`
 
 ## Estructura
 
 ```
 backend/
-├── main.py              # app FastAPI + endpoints
+├── main.py              # app FastAPI + endpoints (/health, /chat)
+├── gemini_client.py      # arma el prompt (system prompt + catálogo) y llama a Gemini
 ├── requirements.txt
+├── prompts/
+│   └── system_prompt.py # instrucciones del chatbot para Gemini
 └── data/
     └── catalogo.json    # catálogo ficticio de productos (datos de ejemplo)
 ```
