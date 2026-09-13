@@ -28,10 +28,27 @@
   --radius-sm: 8px;
   --shadow-card: 0 1px 3px rgba(36, 28, 21, 0.06), 0 8px 24px rgba(36, 28, 21, 0.06);
 
+  /* Ancho máximo del contenido (header, layout principal y footer
+     comparten esta variable para quedar alineados). Se agranda en
+     monitores grandes para no dejar tanto espacio vacío a los costados. */
+  --content-max-width: 1120px;
+
   font-family: var(--font-body);
   line-height: 1.5;
   color: var(--color-text);
   background-color: var(--color-bg);
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --content-max-width: 1320px;
+  }
+}
+
+@media (min-width: 1800px) {
+  :root {
+    --content-max-width: 1560px;
+  }
 }
 
 * {

@@ -15,18 +15,20 @@ function VinylLogo() {
 function Header() {
   return (
     <header className="site-header">
-      <div className="site-header__brand">
-        <VinylLogo />
-        <div>
-          <span className="site-header__name">RecordShop AI</span>
-          <span className="site-header__tagline">CDs and vinyl records with a built-in assistant</span>
+      <div className="site-header__inner">
+        <div className="site-header__brand">
+          <VinylLogo />
+          <div>
+            <span className="site-header__name">RecordShop AI</span>
+            <span className="site-header__tagline">CDs and vinyl records with a built-in assistant</span>
+          </div>
         </div>
-      </div>
 
-      <nav className="site-header__nav">
-        <a href="#catalogo">Catalog</a>
-        <a href="#politicas">Shipping &amp; Returns</a>
-      </nav>
+        <nav className="site-header__nav">
+          <a href="#catalogo">Catalog</a>
+          <a href="#politicas">Shipping &amp; Returns</a>
+        </nav>
+      </div>
     </header>
   )
 }
