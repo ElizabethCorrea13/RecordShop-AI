@@ -5,34 +5,34 @@ function Footer() {
     <footer id="politicas" className="site-footer">
       <div className="site-footer__grid">
         <div>
-          <h4>Envíos</h4>
+          <h4>Shipping</h4>
           <ul>
-            <li>Estándar: 5-7 días hábiles — $1500</li>
-            <li>Express: 2-3 días hábiles — $3500</li>
-            <li>Gratis en compras +$15000</li>
-            <li>Cobertura: todo el país</li>
+            <li>Standard: 5-7 business days — $1500</li>
+            <li>Express: 2-3 business days — $3500</li>
+            <li>Free on orders over $15000</li>
+            <li>Coverage: nationwide</li>
           </ul>
         </div>
         <div>
-          <h4>Devoluciones</h4>
+          <h4>Returns</h4>
           <ul>
-            <li>30 días desde la recepción</li>
-            <li>Producto sin usar, en empaque original</li>
-            <li>Vinilos: sello de calidad no debe estar roto</li>
-            <li>Oferta/liquidación: sin devolución, solo cambio</li>
+            <li>30 days from receipt</li>
+            <li>Item must be unused, in original packaging</li>
+            <li>Vinyl records: quality seal must not be broken</li>
+            <li>Sale/clearance items: no returns, exchange only</li>
           </ul>
         </div>
         <div>
-          <h4>¿Dudas?</h4>
+          <h4>Questions?</h4>
           <p className="site-footer__hint">
-            Preguntale al asistente del chat sobre cualquier disco, envío o devolución.
+            Ask the chat assistant about any album, shipping, or returns.
           </p>
         </div>
       </div>
 
       <p className="site-footer__disclaimer">
-        RecordShop AI — proyecto de portfolio. Catálogo, precios y políticas son
-        ficticios; no se procesan pagos ni ventas reales.
+        RecordShop AI — a portfolio project. Catalog, prices, and policies are
+        fictional; no real payments or sales are processed.
       </p>
     </footer>
   )

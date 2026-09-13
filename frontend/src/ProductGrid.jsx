@@ -9,7 +9,7 @@ function ProductCover({ product }) {
       <img
         className="product-card__cover-img"
         src={product.cover}
-        alt={`Portada de ${product.name}`}
+        alt={`Cover art for ${product.name}`}
         loading="lazy"
         onError={() => setFailed(true)}
       />
@@ -25,16 +25,16 @@ function ProductCover({ product }) {
   )
 }
 
-const CURRENCY = new Intl.NumberFormat('es-AR', {
+const CURRENCY = new Intl.NumberFormat('en-US', {
   style: 'currency',
-  currency: 'ARS',
+  currency: 'USD',
   maximumFractionDigits: 0,
 })
 
 function ProductGrid({ apiUrl, onAskAbout }) {
   const [products, setProducts] = useState([])
   const [status, setStatus] = useState('loading') // loading | ok | error
-  const [genreFilter, setGenreFilter] = useState('todos')
+  const [genreFilter, setGenreFilter] = useState('all')
 
   useEffect(() => {
     fetch(`${apiUrl}/catalog`)
@@ -46,16 +46,16 @@ function ProductGrid({ apiUrl, onAskAbout }) {
       .catch(() => setStatus('error'))
   }, [apiUrl])
 
-  const genres = ['todos', ...new Set(products.map((p) => p.genre))]
+  const genres = ['all', ...new Set(products.map((p) => p.genre))]
   const visible =
-    genreFilter === 'todos' ? products : products.filter((p) => p.genre === genreFilter)
+    genreFilter === 'all' ? products : products.filter((p) => p.genre === genreFilter)
 
   if (status === 'loading') {
-    return <p className="products__status">Cargando catálogo…</p>
+    return <p className="products__status">Loading catalog…</p>
   }
 
   if (status === 'error') {
-    return <p className="products__status products__status--error">No se pudo cargar el catálogo.</p>
+    return <p className="products__status products__status--error">Couldn't load the catalog.</p>
   }
 
   return (
@@ -81,22 +81,22 @@ function ProductGrid({ apiUrl, onAskAbout }) {
               <h3>{p.name}</h3>
               <p className="product-card__artist">{p.artist}</p>
               <p className="product-card__meta">
-                {p.format === 'vinyl' ? 'Vinilo' : 'CD'} · {p.genre}
+                {p.format === 'vinyl' ? 'Vinyl' : 'CD'} · {p.genre}
               </p>
               <div className="product-card__footer">
                 <span className="product-card__price">{CURRENCY.format(p.price)}</span>
                 {p.stock === 0 ? (
-                  <span className="product-card__stock product-card__stock--out">Agotado</span>
+                  <span className="product-card__stock product-card__stock--out">Out of stock</span>
                 ) : (
-                  <span className="product-card__stock">{p.stock} en stock</span>
+                  <span className="product-card__stock">{p.stock} in stock</span>
                 )}
               </div>
               <button
                 type="button"
                 className="product-card__ask"
-                onClick={() => onAskAbout(`Tienen ${p.name} de ${p.artist}?`)}
+                onClick={() => onAskAbout(`Do you have ${p.name} by ${p.artist}?`)}
               >
-                Preguntarle al asistente
+                Ask the assistant
               </button>
             </div>
           </article>

@@ -3,7 +3,7 @@ import './Chat.css'
 
 const WELCOME_MESSAGE = {
   role: 'assistant',
-  text: '¡Hola! Soy el asistente de RecordShop AI. Preguntame sobre el catálogo, envíos o devoluciones.',
+  text: "Hi! I'm the RecordShop AI assistant. Ask me about the catalog, shipping, or returns.",
 }
 
 // Debe coincidir con el límite del backend (ver ChatRequest en main.py).
@@ -72,7 +72,7 @@ const Chat = forwardRef(function Chat({ apiUrl }, ref) {
       const data = await res.json()
       if (!res.ok) {
         // El backend manda el detalle del error en `detail` (ver backend/main.py)
-        throw new Error(data.detail ?? 'Error desconocido del servidor')
+        throw new Error(data.detail ?? 'Unknown server error')
       }
       setMessages((prev) => [...prev, { role: 'assistant', text: data.reply }])
     } catch (err) {
@@ -105,7 +105,7 @@ const Chat = forwardRef(function Chat({ apiUrl }, ref) {
           onClick={clearChat}
           disabled={messages.length === 1}
         >
-          Limpiar conversación
+          Clear conversation
         </button>
       </div>
 
@@ -143,7 +143,7 @@ const Chat = forwardRef(function Chat({ apiUrl }, ref) {
             type="button"
             className="chat__error-dismiss"
             onClick={() => setError(null)}
-            aria-label="Cerrar aviso de error"
+            aria-label="Dismiss error"
           >
             ×
           </button>
@@ -156,12 +156,12 @@ const Chat = forwardRef(function Chat({ apiUrl }, ref) {
           value={input}
           onChange={(e) => setInput(e.target.value.slice(0, MAX_LENGTH))}
           onKeyDown={handleKeyDown}
-          placeholder="Escribí tu consulta… (Enter para enviar)"
+          placeholder="Type your question… (Enter to send)"
           disabled={loading}
           rows={1}
         />
         <button type="submit" disabled={loading || !input.trim()}>
-          Enviar
+          Send
         </button>
       </form>
       {input.length >= WARN_AT && (

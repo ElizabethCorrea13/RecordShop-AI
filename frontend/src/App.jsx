@@ -29,8 +29,8 @@ function App() {
       <div className="layout">
         <main className="layout__main">
           <p className="layout__intro">
-            Vinilos y CDs seleccionados. Preguntale al asistente por cualquier
-            disco, envío o devolución.
+            Curated vinyl records and CDs. Ask the assistant about any album,
+            shipping, or returns.
           </p>
           <ProductGrid
             apiUrl={API_URL}
@@ -44,8 +44,8 @@ function App() {
           ) : (
             <p className="layout__placeholder">
               {backendStatus === 'checking'
-                ? 'Conectando con el servidor…'
-                : 'El chat necesita que el backend esté corriendo (ver estado arriba).'}
+                ? 'Connecting to the server…'
+                : 'The chat needs the backend to be running (see status above).'}
             </p>
           )}
         </aside>

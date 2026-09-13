@@ -36,8 +36,8 @@ def _get_client() -> genai.Client:
         api_key = os.getenv("GEMINI_API_KEY")
         if not api_key:
             raise GeminiConfigError(
-                "Falta GEMINI_API_KEY. Copiá .env.example a backend/.env y "
-                "completá la clave (https://aistudio.google.com/apikey)."
+                "Missing GEMINI_API_KEY. Copy .env.example to backend/.env and "
+                "fill in the key (https://aistudio.google.com/apikey)."
             )
         _client = genai.Client(api_key=api_key)
     return _client
@@ -54,8 +54,8 @@ def ask(message: str) -> str:
     try:
         response = client.models.generate_content(model=MODEL_NAME, contents=prompt)
     except APIError as e:
-        raise RuntimeError(f"Error llamando a la API de Gemini: {e}") from e
+        raise RuntimeError(f"Error calling the Gemini API: {e}") from e
 
     if not response.text:
-        raise RuntimeError("Gemini no devolvió texto en la respuesta.")
+        raise RuntimeError("Gemini didn't return any text in the response.")
     return response.text

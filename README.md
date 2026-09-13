@@ -132,6 +132,11 @@ footer con políticas. Probado a mano en el navegador. Falta el deploy.
   tener que tocar código cada vez que Google saca una versión nueva de Flash.
 - **`/chat` no guarda historial** — cada mensaje es independiente; coherente
   con "sin memoria entre sesiones" (fuera de alcance del proyecto).
+- **La interfaz (lo que ve el visitante) está en inglés**, pensada para
+  portfolio ante reclutadores internacionales. La documentación (este
+  README, `CLAUDE.md`, comentarios del código) queda en español. El
+  `system_prompt.py` responde en el idioma en que escriba el cliente, así
+  que el chat funciona igual si alguien le escribe en español.
 
 ### Políticas de la tienda (ficticias, para este proyecto)
 
