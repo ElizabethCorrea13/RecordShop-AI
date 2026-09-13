@@ -9,12 +9,13 @@ Cómo correrlo (desde la carpeta backend/, con el venv activado):
     uvicorn main:app --reload --port 8001
 """
 
-from fastapi import FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from catalog import load_catalog
 from gemini_client import GeminiConfigError, ask as ask_gemini
+from rate_limit import enforce_chat_rate_limit
 
 app = FastAPI(title="RecordShop AI API", version="0.1.0")
 
@@ -55,12 +56,18 @@ class ChatResponse(BaseModel):
     reply: str
 
 
-@app.post("/chat", response_model=ChatResponse)
+@app.post(
+    "/chat",
+    response_model=ChatResponse,
+    dependencies=[Depends(enforce_chat_rate_limit)],
+)
 def chat(payload: ChatRequest):
     """Recibe un mensaje del cliente y devuelve la respuesta de Gemini.
 
     Sin memoria entre requests: cada llamada es independiente (fuera de
-    alcance del proyecto guardar historial entre sesiones).
+    alcance del proyecto guardar historial entre sesiones). Limitado por IP
+    (ver rate_limit.py) para que una sola visita no agote el límite de
+    requests/minuto de Gemini, que es compartido por todos.
     """
     try:
         reply = ask_gemini(payload.message)

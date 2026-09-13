@@ -35,6 +35,12 @@ La API queda en http://localhost:8001. Docs interactivas en http://localhost:800
 ver `CLAUDE.md`). Si falta `GEMINI_API_KEY` devuelve 500 con un mensaje claro;
 si Gemini falla (rate limit, red, etc.) devuelve 502.
 
+**Rate limit propio:** además del límite de Gemini, `/chat` limita a 10
+requests/minuto por IP (`rate_limit.py`) — sin esto, una sola visita
+consultando rápido agota el límite de Gemini (compartido por todos) y rompe
+el chat para cualquier otra persona navegando en simultáneo. Devuelve 429
+si se supera.
+
 Probarlo:
 
 ```bash
@@ -55,6 +61,7 @@ backend/
 ├── main.py              # app FastAPI + endpoints (/health, /catalog, /chat)
 ├── gemini_client.py      # arma el prompt (system prompt + catálogo) y llama a Gemini
 ├── catalog.py            # carga data/catalogo.json (lo usan main.py y gemini_client.py)
+├── rate_limit.py         # límite de requests/minuto por IP para /chat
 ├── requirements.txt
 ├── prompts/
 │   └── system_prompt.py # instrucciones del chatbot para Gemini

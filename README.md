@@ -22,6 +22,7 @@ recordshop-ai/
 │   ├── main.py           # app + endpoints (/health, /catalog, /chat)
 │   ├── gemini_client.py  # arma el prompt y llama a Gemini
 │   ├── catalog.py        # carga data/catalogo.json
+│   ├── rate_limit.py     # límite de requests/minuto por IP para /chat
 │   ├── requirements.txt
 │   ├── prompts/
 │   │   └── system_prompt.py
