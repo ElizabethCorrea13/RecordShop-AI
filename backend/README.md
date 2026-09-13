@@ -47,6 +47,18 @@ Probarlo:
 curl -X POST http://localhost:8001/chat -H "Content-Type: application/json" -d "{\"message\":\"tienen Kind of Blue?\"}"
 ```
 
+## Tests
+
+```bash
+pip install -r requirements-dev.txt   # una vez, además de requirements.txt
+pytest
+```
+
+No pegan a la API real de Gemini: `gemini_client` y `rate_limit` se prueban
+mockeando el cliente (`unittest.mock`), y los tests de los endpoints
+(`test_main.py`) mockean `ask_gemini` con FastAPI's `TestClient`. Corren en
+menos de un segundo y no gastan cuota ni necesitan `GEMINI_API_KEY`.
+
 ## Variables de entorno
 
 Copiar `../.env.example` a `backend/.env` y completar:
@@ -63,6 +75,14 @@ backend/
 ├── catalog.py            # carga data/catalogo.json (lo usan main.py y gemini_client.py)
 ├── rate_limit.py         # límite de requests/minuto por IP para /chat
 ├── requirements.txt
+├── requirements-dev.txt  # + pytest, solo para desarrollo
+├── pytest.ini
+├── tests/
+│   ├── conftest.py       # resetea el estado global entre tests
+│   ├── test_catalog.py
+│   ├── test_gemini_client.py
+│   ├── test_rate_limit.py
+│   └── test_main.py      # tests de los endpoints con TestClient
 ├── prompts/
 │   └── system_prompt.py # instrucciones del chatbot para Gemini
 └── data/

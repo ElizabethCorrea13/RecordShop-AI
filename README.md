@@ -24,6 +24,7 @@ recordshop-ai/
 │   ├── catalog.py        # carga data/catalogo.json
 │   ├── rate_limit.py     # límite de requests/minuto por IP para /chat
 │   ├── requirements.txt
+│   ├── tests/            # pytest, no gasta cuota de Gemini (todo mockeado)
 │   ├── prompts/
 │   │   └── system_prompt.py
 │   └── data/
@@ -112,7 +113,8 @@ quedan servidores huérfanos corriendo en segundo plano.
 ## Estado actual
 
 Funcional de punta a punta: backend con `/health`, `/catalog` y `/chat`
-(Gemini integrado), y frontend tipo tienda — header con menú, grilla de
+(Gemini integrado, con reintentos, rate limit propio y tests con `pytest`
+en `backend/tests/`), y frontend tipo tienda — header con menú, grilla de
 productos (consume `/catalog`), chat fijo a la derecha (consume `/chat`,
 también se puede precargar una pregunta desde una tarjeta de producto) y
 footer con políticas. Probado a mano en el navegador. Falta el deploy.
