@@ -25,10 +25,11 @@ La API queda en http://localhost:8001. Docs interactivas en http://localhost:800
 
 ## Endpoints
 
-| Método | Ruta      | Body                    | Respuesta                 | Para qué sirve                                  |
-|--------|-----------|-------------------------|----------------------------|-------------------------------------------------|
-| GET    | `/health` | —                       | `{"status": "ok"}`         | Health-check: probar que el server vive          |
-| POST   | `/chat`   | `{"message": "..."}`    | `{"reply": "..."}`         | Le pasa el mensaje a Gemini junto con el catálogo y el system prompt |
+| Método | Ruta       | Body                    | Respuesta                 | Para qué sirve                                  |
+|--------|------------|-------------------------|----------------------------|-------------------------------------------------|
+| GET    | `/health`  | —                       | `{"status": "ok"}`         | Health-check: probar que el server vive          |
+| GET    | `/catalog` | —                       | lista de productos (JSON)  | Catálogo para mostrar en la página (no pasa por Gemini) |
+| POST   | `/chat`    | `{"message": "..."}`    | `{"reply": "..."}`         | Le pasa el mensaje a Gemini junto con el catálogo y el system prompt |
 
 `/chat` no guarda historial entre requests (fuera de alcance del proyecto,
 ver `CLAUDE.md`). Si falta `GEMINI_API_KEY` devuelve 500 con un mensaje claro;
@@ -51,8 +52,9 @@ Copiar `../.env.example` a `backend/.env` y completar:
 
 ```
 backend/
-├── main.py              # app FastAPI + endpoints (/health, /chat)
+├── main.py              # app FastAPI + endpoints (/health, /catalog, /chat)
 ├── gemini_client.py      # arma el prompt (system prompt + catálogo) y llama a Gemini
+├── catalog.py            # carga data/catalogo.json (lo usan main.py y gemini_client.py)
 ├── requirements.txt
 ├── prompts/
 │   └── system_prompt.py # instrucciones del chatbot para Gemini

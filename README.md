@@ -19,17 +19,23 @@ catálogo de productos. Sin pagos reales, sin login, sin memoria entre sesiones
 recordshop-ai/
 ├── .env.example          # plantilla de variables de entorno del backend
 ├── backend/              # API FastAPI
-│   ├── main.py           # app + endpoints (/health, /chat)
+│   ├── main.py           # app + endpoints (/health, /catalog, /chat)
 │   ├── gemini_client.py  # arma el prompt y llama a Gemini
+│   ├── catalog.py        # carga data/catalogo.json
 │   ├── requirements.txt
 │   ├── prompts/
 │   │   └── system_prompt.py
 │   └── data/
 │       └── catalogo.json # catálogo ficticio (datos de ejemplo)
-└── frontend/             # interfaz de chat (React + Vite)
+└── frontend/             # tienda + chat (React + Vite)
     ├── index.html
     ├── package.json
     └── src/
+        ├── App.jsx        # layout: header, catálogo, chat, footer
+        ├── Header.jsx      # menú
+        ├── Footer.jsx      # políticas + disclaimer
+        ├── ProductGrid.jsx # grilla de productos (consume /catalog)
+        └── Chat.jsx        # interfaz de chat (consume /chat)
 ```
 
 ## Cómo correrlo localmente
@@ -104,9 +110,11 @@ quedan servidores huérfanos corriendo en segundo plano.
 
 ## Estado actual
 
-Funcional de punta a punta: backend con `/health` y `/chat` (Gemini
-integrado), y frontend con interfaz de chat que habla con el backend.
-Probado a mano en el navegador. Falta pulir detalles de UI/UX y el deploy.
+Funcional de punta a punta: backend con `/health`, `/catalog` y `/chat`
+(Gemini integrado), y frontend tipo tienda — header con menú, grilla de
+productos (consume `/catalog`), chat fijo a la derecha (consume `/chat`,
+también se puede precargar una pregunta desde una tarjeta de producto) y
+footer con políticas. Probado a mano en el navegador. Falta el deploy.
 
 ## Decisiones técnicas
 

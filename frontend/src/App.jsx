@@ -1,4 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import Header from './Header'
+import Footer from './Footer'
+import ProductGrid from './ProductGrid'
 import Chat from './Chat'
 import './App.css'
 
@@ -6,16 +9,11 @@ import './App.css'
 // Se puede sobreescribir con la variable de entorno VITE_API_URL (ver .env.example).
 const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8001'
 
-const STATUS_LABEL = {
-  checking: 'verificando…',
-  ok: 'conectado',
-  error: 'sin conexión',
-}
-
 function App() {
   // Estado del backend: 'checking' | 'ok' | 'error'. Se usa para habilitar el
   // chat y para mostrarle al usuario si el backend está disponible.
   const [backendStatus, setBackendStatus] = useState('checking')
+  const chatRef = useRef(null)
 
   useEffect(() => {
     fetch(`${API_URL}/health`)
@@ -25,36 +23,36 @@ function App() {
   }, [])
 
   return (
-    <main className="app">
-      <header className="app__header">
-        <div className="app__title-row">
-          <span className="app__logo" aria-hidden="true">
-            💿
-          </span>
-          <div>
-            <h1>RecordShop AI</h1>
-            <p className="app__subtitle">
-              Chatbot de soporte para una tienda de CDs y vinilos
+    <div className="page">
+      <Header backendStatus={backendStatus} />
+
+      <div className="layout">
+        <main className="layout__main">
+          <p className="layout__intro">
+            Vinilos y CDs seleccionados. Preguntale al asistente por cualquier
+            disco, envío o devolución.
+          </p>
+          <ProductGrid
+            apiUrl={API_URL}
+            onAskAbout={(text) => chatRef.current?.askAbout(text)}
+          />
+        </main>
+
+        <aside className="layout__chat">
+          {backendStatus === 'ok' ? (
+            <Chat ref={chatRef} apiUrl={API_URL} />
+          ) : (
+            <p className="layout__placeholder">
+              {backendStatus === 'checking'
+                ? 'Conectando con el servidor…'
+                : 'El chat necesita que el backend esté corriendo (ver estado arriba).'}
             </p>
-          </div>
-        </div>
+          )}
+        </aside>
+      </div>
 
-        <span className={`badge badge--${backendStatus}`}>
-          <span className="badge__dot" />
-          Backend {STATUS_LABEL[backendStatus]}
-        </span>
-      </header>
-
-      {backendStatus === 'ok' ? (
-        <Chat apiUrl={API_URL} />
-      ) : (
-        <p className="app__placeholder">
-          {backendStatus === 'checking'
-            ? 'Conectando con el servidor…'
-            : 'El chat necesita que el backend esté corriendo (ver estado arriba).'}
-        </p>
-      )}
-    </main>
+      <Footer />
+    </div>
   )
 }
 

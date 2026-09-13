@@ -7,19 +7,16 @@ independiente, no se guarda historial de conversación (fuera de alcance
 del proyecto, ver CLAUDE.md).
 """
 
-import json
 import os
-from pathlib import Path
 
 from dotenv import load_dotenv
 from google import genai
 from google.genai.errors import APIError
 
+from catalog import load_catalog_json
 from prompts.system_prompt import SYSTEM_PROMPT
 
 load_dotenv()
-
-CATALOG_PATH = Path(__file__).parent / "data" / "catalogo.json"
 
 # "gemini-flash-latest" es un alias que siempre apunta al modelo Flash vigente,
 # así no hay que actualizar el código cada vez que Google saca una versión
@@ -46,18 +43,12 @@ def _get_client() -> genai.Client:
     return _client
 
 
-def _load_catalog() -> str:
-    with open(CATALOG_PATH, encoding="utf-8") as f:
-        catalog = json.load(f)
-    return json.dumps(catalog, ensure_ascii=False)
-
-
 def ask(message: str) -> str:
     """Envía un mensaje del cliente a Gemini con el system prompt y el catálogo."""
     client = _get_client()
     prompt = (
         f"{SYSTEM_PROMPT}\n\n"
-        f"PRODUCT CATALOG (JSON):\n{_load_catalog()}\n\n"
+        f"PRODUCT CATALOG (JSON):\n{load_catalog_json()}\n\n"
         f"CUSTOMER MESSAGE:\n{message}"
     )
     try:

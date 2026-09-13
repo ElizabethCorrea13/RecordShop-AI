@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import './Chat.css'
 
 const WELCOME_MESSAGE = {
@@ -10,13 +10,25 @@ const WELCOME_MESSAGE = {
 const MAX_LENGTH = 2000
 const WARN_AT = 1800
 
-function Chat({ apiUrl }) {
+const Chat = forwardRef(function Chat({ apiUrl }, ref) {
   const [messages, setMessages] = useState([WELCOME_MESSAGE])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const containerRef = useRef(null)
   const bottomRef = useRef(null)
   const textareaRef = useRef(null)
+
+  useImperativeHandle(ref, () => ({
+    // Lo usan las tarjetas de producto para precargar una pregunta y
+    // llevar el foco al chat (útil sobre todo en mobile, donde el chat
+    // queda debajo del catálogo en vez de al costado).
+    askAbout(text) {
+      setInput(text)
+      containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+      textareaRef.current?.focus()
+    },
+  }))
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -84,7 +96,7 @@ function Chat({ apiUrl }) {
   }
 
   return (
-    <div className="chat">
+    <div className="chat" ref={containerRef}>
       <div className="chat__header">
         <span>Chat</span>
         <button
@@ -159,6 +171,6 @@ function Chat({ apiUrl }) {
       )}
     </div>
   )
-}
+})
 
 export default Chat

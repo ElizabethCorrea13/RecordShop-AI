@@ -1,8 +1,9 @@
 """
 RecordShop AI — API backend.
 
-Expone el health-check y el endpoint de chat, que arma un prompt con el
-catálogo completo y llama a Gemini (ver gemini_client.py).
+Expone el health-check, el catálogo de productos y el endpoint de chat,
+que arma un prompt con el catálogo completo y llama a Gemini (ver
+gemini_client.py).
 
 Cómo correrlo (desde la carpeta backend/, con el venv activado):
     uvicorn main:app --reload --port 8001
@@ -12,6 +13,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
+from catalog import load_catalog
 from gemini_client import GeminiConfigError, ask as ask_gemini
 
 app = FastAPI(title="RecordShop AI API", version="0.1.0")
@@ -37,6 +39,12 @@ app.add_middleware(
 def health():
     """Health-check simple: sirve para monitoreo y para probar el deploy."""
     return {"status": "ok"}
+
+
+@app.get("/catalog")
+def catalog():
+    """Catálogo de productos, para mostrarlo en la página (no pasa por Gemini)."""
+    return load_catalog()
 
 
 class ChatRequest(BaseModel):
