@@ -142,7 +142,16 @@
 
 .product-card__stock {
   font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.product-card__stock--ok {
   color: var(--color-success-text);
+  font-weight: 400;
+}
+
+.product-card__stock--low {
+  color: var(--color-warning-text);
 }
 
 .product-card__stock--out {

@@ -31,6 +31,15 @@ const CURRENCY = new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 0,
 })
 
+// A partir de cuántas unidades dejamos de marcar "casi sin stock".
+const LOW_STOCK_THRESHOLD = 5
+
+function stockStatus(stock) {
+  if (stock === 0) return 'out'
+  if (stock <= LOW_STOCK_THRESHOLD) return 'low'
+  return 'ok'
+}
+
 function ProductGrid({ apiUrl, onAskAbout }) {
   const [products, setProducts] = useState([])
   const [status, setStatus] = useState('loading') // loading | ok | error
@@ -88,11 +97,9 @@ function ProductGrid({ apiUrl, onAskAbout }) {
               </p>
               <div className="product-card__footer">
                 <span className="product-card__price">{CURRENCY.format(p.price)}</span>
-                {p.stock === 0 ? (
-                  <span className="product-card__stock product-card__stock--out">Out of stock</span>
-                ) : (
-                  <span className="product-card__stock">{p.stock} in stock</span>
-                )}
+                <span className={`product-card__stock product-card__stock--${stockStatus(p.stock)}`}>
+                  {p.stock === 0 ? 'Out of stock' : `${p.stock} in stock`}
+                </span>
               </div>
               <button
                 type="button"
