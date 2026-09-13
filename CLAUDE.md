@@ -85,7 +85,9 @@ Full-stack developer con 2 años de experiencia, cursando Licenciatura en Cienci
 - [x] Rate limit propio en `/chat` — `rate_limit.py`, 10 requests/minuto por IP, para no agotar el límite de Gemini (compartido por todos los visitantes)
 - [x] Tests automatizados — `backend/tests/` con `pytest`, 21 tests mockeados (no gastan cuota de Gemini)
 - [x] README completo — qué es, stack, cómo correrlo, decisiones técnicas (raíz + uno por carpeta)
-- [ ] Deploy (a definir: Vercel para front, Render para back)
+- [x] Deploy — frontend en Vercel (https://record-shop-ai.vercel.app/), backend en Render
+  (https://recordshop-ai-backend.onrender.com); probado de punta a punta en producción
+  (CORS con `ALLOWED_ORIGIN`, chat respondiendo con datos reales del catálogo)
 
 ### Cómo correrlo localmente
 

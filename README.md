@@ -1,5 +1,9 @@
 # RecordShop-AI
 
+**🔗 Demo en vivo: [record-shop-ai.vercel.app](https://record-shop-ai.vercel.app/)**
+(el backend gratis de Render "duerme" sin uso — el primer mensaje puede tardar
+30-50s mientras arranca)
+
 Chatbot de soporte con IA para una tienda ficticia de CDs y vinilos.
 Proyecto de portfolio — **FastAPI + React + Gemini API**.
 
@@ -113,6 +117,12 @@ quedan servidores huérfanos corriendo en segundo plano.
 
 ## Deploy
 
+**Ya deployado:**
+- Frontend: https://record-shop-ai.vercel.app/
+- Backend: https://recordshop-ai-backend.onrender.com
+
+Guía para reproducirlo (por ejemplo, en otra cuenta):
+
 **Backend → Render, frontend → Vercel.** El orden importa: el backend necesita
 un dominio antes de poder buildear el frontend con la URL correcta, y el
 backend necesita saber la URL del frontend para CORS — por eso se hace en
@@ -158,8 +168,9 @@ Funcional de punta a punta: backend con `/health`, `/catalog` y `/chat`
 en `backend/tests/`), y frontend tipo tienda — header con menú, grilla de
 productos (consume `/catalog`), chat fijo a la derecha (consume `/chat`,
 también se puede precargar una pregunta desde una tarjeta de producto) y
-footer con políticas. Probado a mano en el navegador. Listo para deployar
-(ver sección Deploy) — falta ejecutarlo.
+footer con políticas. **Deployado y probado de punta a punta en producción**
+(ver sección Deploy) — CORS, rate limit y el chat respondiendo con datos
+reales del catálogo, todo verificado en vivo.
 
 ## Decisiones técnicas
 
