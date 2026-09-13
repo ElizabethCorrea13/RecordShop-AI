@@ -7,7 +7,8 @@
     "genre": "jazz",
     "price": 9800,
     "stock": 12,
-    "description": "One of the most influential jazz albums in history, recorded in 1959."
+    "description": "One of the most influential jazz albums in history, recorded in 1959.",
+    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music/7f/9f/d6/mzi.vtnaewef.jpg/600x600bb.jpg"
   },
   {
     "id": 2,
@@ -17,7 +18,8 @@
     "genre": "rock",
     "price": 8900,
     "stock": 7,
-    "description": "A rock classic from the '70s, featuring some of the band's most well-known songs."
+    "description": "A rock classic from the '70s, featuring some of the band's most well-known songs.",
+    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/4d/13/ba/4d13bac3-d3d5-7581-2c74-034219eadf2b/081227970949.jpg/600x600bb.jpg"
   },
   {
     "id": 3,
@@ -27,7 +29,8 @@
     "genre": "electronic",
     "price": 5400,
     "stock": 0,
-    "description": "An iconic early-2000s electronic album, currently out of stock."
+    "description": "An iconic early-2000s electronic album, currently out of stock.",
+    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/fd/4a/77/fd4a77db-0ebc-d043-41a2-f32fa1bb0fb4/dj.qrikkdwj.jpg/600x600bb.jpg"
   },
   {
     "id": 4,
@@ -37,7 +40,8 @@
     "genre": "jazz",
     "price": 4900,
     "stock": 20,
-    "description": "A 1957 recording considered a hard bop masterpiece."
+    "description": "A 1957 recording considered a hard bop masterpiece.",
+    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/6e/1a/13/6e1a134d-8f6f-d90f-b855-ea69436a2e8b/17UM1IM45370.rgb.jpg/600x600bb.jpg"
   },
   {
     "id": 5,
@@ -47,7 +51,8 @@
     "genre": "rock",
     "price": 10500,
     "stock": 1,
-    "description": "The last album the band recorded together; last unit available in stock."
+    "description": "The last album the band recorded together; last unit available in stock.",
+    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/48/53/43/485343e3-dd6a-0034-faec-f4b6403f8108/13UMGIM63890.rgb.jpg/600x600bb.jpg"
   },
   {
     "id": 6,
@@ -57,7 +62,8 @@
     "genre": "electronic",
     "price": 11200,
     "stock": 5,
-    "description": "A 2013 album featuring standout collaborations, double-vinyl edition."
+    "description": "A 2013 album featuring standout collaborations, double-vinyl edition.",
+    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e8/43/5f/e8435ffa-b6b9-b171-40ab-4ff3959ab661/886443919266.jpg/600x600bb.jpg"
   },
   {
     "id": 7,
@@ -67,16 +73,18 @@
     "genre": "electronic",
     "price": 5900,
     "stock": 15,
-    "description": "Same recording as the vinyl edition, on CD."
+    "description": "Same recording as the vinyl edition, on CD.",
+    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e8/43/5f/e8435ffa-b6b9-b171-40ab-4ff3959ab661/886443919266.jpg/600x600bb.jpg"
   },
   {
     "id": 8,
-    "name": "Buena Vista Social Club",
-    "artist": "Buena Vista Social Club",
-    "format": "CD",
-    "genre": "world music",
-    "price": 4700,
-    "stock": 9,
-    "description": "A 1997 recording that revived traditional Cuban music on a global scale."
+    "name": "Evermore",
+    "artist": "Taylor Swift",
+    "format": "vinyl",
+    "genre": "folk",
+    "price": 9500,
+    "stock": 8,
+    "description": "A 2020 surprise album blending folk and alternative influences, a sister record to Folklore.",
+    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/82/33/6e/82336ed3-3d1b-e920-b0a7-61775acd0f33/20UM1IM14847.rgb.jpg/600x600bb.jpg"
   }
 ]

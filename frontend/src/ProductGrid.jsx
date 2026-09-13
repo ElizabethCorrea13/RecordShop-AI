@@ -1,6 +1,30 @@
 import { useEffect, useState } from 'react'
 import './ProductGrid.css'
 
+function ProductCover({ product }) {
+  const [failed, setFailed] = useState(false)
+
+  if (product.cover && !failed) {
+    return (
+      <img
+        className="product-card__cover-img"
+        src={product.cover}
+        alt={`Portada de ${product.name}`}
+        loading="lazy"
+        onError={() => setFailed(true)}
+      />
+    )
+  }
+
+  // Respaldo si el álbum no tiene portada o la URL falla: mismo bloque de
+  // color de antes, para que la tarjeta nunca quede rota.
+  return (
+    <div className={`product-card__cover product-card__cover--${slug(product.genre)}`}>
+      {product.format === 'vinyl' ? '💿' : '📀'}
+    </div>
+  )
+}
+
 const CURRENCY = new Intl.NumberFormat('es-AR', {
   style: 'currency',
   currency: 'ARS',
@@ -52,9 +76,7 @@ function ProductGrid({ apiUrl, onAskAbout }) {
       <div className="products__grid">
         {visible.map((p) => (
           <article key={p.id} className="product-card">
-            <div className={`product-card__cover product-card__cover--${slug(p.genre)}`}>
-              {p.format === 'vinyl' ? '💿' : '📀'}
-            </div>
+            <ProductCover product={p} />
             <div className="product-card__body">
               <h3>{p.name}</h3>
               <p className="product-card__artist">{p.artist}</p>
