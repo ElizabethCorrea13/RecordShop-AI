@@ -16,8 +16,27 @@
 }
 
 .site-header__logo {
-  font-size: 1.8rem;
-  line-height: 1;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.site-header__logo-disc {
+  fill: #241c15;
+}
+
+.site-header__logo-groove {
+  fill: none;
+  stroke: #4a3d30;
+  stroke-width: 1;
+}
+
+.site-header__logo-label {
+  fill: var(--color-accent);
+}
+
+.site-header__logo-hole {
+  fill: #241c15;
 }
 
 .site-header__name {
@@ -47,39 +66,6 @@
 
 .site-header__nav a:hover {
   color: var(--color-accent);
-}
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.75rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.badge__dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: currentColor;
-}
-
-.badge--checking {
-  background: var(--color-neutral-bg);
-  color: var(--color-neutral-text);
-}
-
-.badge--ok {
-  background: var(--color-success-bg);
-  color: var(--color-success-text);
-}
-
-.badge--error {
-  background: var(--color-error-bg);
-  color: var(--color-error-text);
 }
 
 @media (max-width: 720px) {

@@ -24,7 +24,7 @@ function App() {
 
   return (
     <div className="page">
-      <Header backendStatus={backendStatus} />
+      <Header />
 
       <div className="layout">
         <main className="layout__main">
@@ -45,7 +45,7 @@ function App() {
             <p className="layout__placeholder">
               {backendStatus === 'checking'
                 ? 'Connecting to the server…'
-                : 'The chat needs the backend to be running (see status above).'}
+                : "The chat isn't available right now. Try again in a moment."}
             </p>
           )}
         </aside>

@@ -1,18 +1,22 @@
 import './Header.css'
 
-const STATUS_LABEL = {
-  checking: 'checking…',
-  ok: 'connected',
-  error: 'disconnected',
+function VinylLogo() {
+  return (
+    <svg className="site-header__logo" viewBox="0 0 32 32" aria-hidden="true">
+      <circle className="site-header__logo-disc" cx="16" cy="16" r="15" />
+      <circle className="site-header__logo-groove" cx="16" cy="16" r="10.5" />
+      <circle className="site-header__logo-groove" cx="16" cy="16" r="7" />
+      <circle className="site-header__logo-label" cx="16" cy="16" r="4.5" />
+      <circle className="site-header__logo-hole" cx="16" cy="16" r="1.4" />
+    </svg>
+  )
 }
 
-function Header({ backendStatus }) {
+function Header() {
   return (
     <header className="site-header">
       <div className="site-header__brand">
-        <span className="site-header__logo" aria-hidden="true">
-          💿
-        </span>
+        <VinylLogo />
         <div>
           <span className="site-header__name">RecordShop AI</span>
           <span className="site-header__tagline">CDs and vinyl records with a built-in assistant</span>
@@ -23,11 +27,6 @@ function Header({ backendStatus }) {
         <a href="#catalogo">Catalog</a>
         <a href="#politicas">Shipping &amp; Returns</a>
       </nav>
-
-      <span className={`badge badge--${backendStatus}`}>
-        <span className="badge__dot" />
-        Backend {STATUS_LABEL[backendStatus]}
-      </span>
     </header>
   )
 }

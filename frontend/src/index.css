@@ -16,8 +16,9 @@
   --color-success-text: #1a7f37;
   --color-error-bg: #fde5e5;
   --color-error-text: #b42318;
-  --color-neutral-bg: #f0ede8;
-  --color-neutral-text: #6b6259;
+
+  --color-format-vinyl: #a97d2f;
+  --color-format-cd: #3b4a6b;
 
   --font-display: 'Poppins', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;

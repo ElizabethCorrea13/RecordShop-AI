@@ -81,7 +81,10 @@ function ProductGrid({ apiUrl, onAskAbout }) {
               <h3>{p.name}</h3>
               <p className="product-card__artist">{p.artist}</p>
               <p className="product-card__meta">
-                {p.format === 'vinyl' ? 'Vinyl' : 'CD'} · {p.genre}
+                <span className={`product-card__format product-card__format--${p.format}`}>
+                  {p.format === 'vinyl' ? 'Vinyl' : 'CD'}
+                </span>{' '}
+                · {p.genre}
               </p>
               <div className="product-card__footer">
                 <span className="product-card__price">{CURRENCY.format(p.price)}</span>
