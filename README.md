@@ -18,6 +18,7 @@ catálogo de productos. Sin pagos reales, sin login, sin memoria entre sesiones
 ```
 recordshop-ai/
 ├── .env.example          # plantilla de variables de entorno del backend
+├── render.yaml           # blueprint de deploy del backend en Render
 ├── backend/              # API FastAPI
 │   ├── main.py           # app + endpoints (/health, /catalog, /chat)
 │   ├── gemini_client.py  # arma el prompt y llama a Gemini
@@ -110,6 +111,46 @@ ocupado el puerto (`uvicorn --reload` deja procesos hijos que Windows a veces
 reporta mal): mata el árbol completo de procesos de cada ventana, así no
 quedan servidores huérfanos corriendo en segundo plano.
 
+## Deploy
+
+**Backend → Render, frontend → Vercel.** El orden importa: el backend necesita
+un dominio antes de poder buildear el frontend con la URL correcta, y el
+backend necesita saber la URL del frontend para CORS — por eso se hace en
+este orden y se vuelve una vez al backend al final.
+
+### 1. Backend en Render
+
+1. Entrá a [render.com](https://render.com), creá una cuenta (podés con GitHub).
+2. **New > Blueprint**, elegí este repo. Render lee `render.yaml` de la raíz
+   y arma el servicio solo (build/start command, todo ya configurado).
+3. Te va a pedir `GEMINI_API_KEY` — pegala vos ahí (nunca va al repo).
+4. Deploy. Cuando termine, copiá la URL que te da
+   (algo como `https://recordshop-ai-backend.onrender.com`).
+5. Probala: `https://<tu-url>.onrender.com/health` tiene que devolver `{"status":"ok"}`.
+
+> El plan free de Render "duerme" el servicio tras un rato sin tráfico — el
+> primer request después de eso tarda ~30-50s en responder mientras arranca.
+> Es normal, no es un error.
+
+### 2. Frontend en Vercel
+
+1. Entrá a [vercel.com](https://vercel.com), creá una cuenta (podés con GitHub).
+2. **Add New > Project**, elegí este repo.
+3. En la configuración del proyecto: **Root Directory** → `frontend`
+   (Vercel detecta Vite solo, no hace falta tocar el build command).
+4. En **Environment Variables**, agregá `VITE_API_URL` = la URL de Render del
+   paso anterior (ej. `https://recordshop-ai-backend.onrender.com`).
+5. Deploy. Copiá la URL que te da (ej. `https://recordshop-ai.vercel.app`).
+
+### 3. Volver a Render: habilitar CORS para esa URL
+
+1. En el servicio de Render, **Environment**, agregá `ALLOWED_ORIGIN` = la URL
+   de Vercel del paso anterior (sin `/` al final).
+2. Guardá — Render redeploya solo.
+3. Abrí la URL de Vercel: el catálogo tiene que cargar y el chat tiene que
+   funcionar. Si el chat no conecta, revisá que `ALLOWED_ORIGIN` sea
+   exactamente la URL de Vercel (con `https://`, sin barra al final).
+
 ## Estado actual
 
 Funcional de punta a punta: backend con `/health`, `/catalog` y `/chat`
@@ -117,16 +158,19 @@ Funcional de punta a punta: backend con `/health`, `/catalog` y `/chat`
 en `backend/tests/`), y frontend tipo tienda — header con menú, grilla de
 productos (consume `/catalog`), chat fijo a la derecha (consume `/chat`,
 también se puede precargar una pregunta desde una tarjeta de producto) y
-footer con políticas. Probado a mano en el navegador. Falta el deploy.
+footer con políticas. Probado a mano en el navegador. Listo para deployar
+(ver sección Deploy) — falta ejecutarlo.
 
 ## Decisiones técnicas
 
 - **Vite en lugar de Create React App** — CRA está discontinuado; Vite es el
   scaffold recomendado hoy para SPAs de React (arranque y HMR más rápidos).
-- **CORS habilitado para cualquier puerto de `localhost`** (`allow_origin_regex`
-  en `backend/main.py`) — el navegador bloquea llamadas entre orígenes
-  distintos, y Vite salta de puerto si el anterior está ocupado; en producción
-  esto habría que restringirlo al dominio real.
+- **CORS: localhost siempre permitido (regex), producción por variable de
+  entorno** (`backend/main.py`) — en dev acepta cualquier puerto de
+  `localhost`/`127.0.0.1` porque Vite salta de puerto si el anterior está
+  ocupado; en producción se suma el dominio real vía `ALLOWED_ORIGIN`, que no
+  se hardcodea porque no se conoce hasta que el frontend está deployado (ver
+  sección Deploy).
 - **La API key de Gemini vive en `backend/.env`** — nunca hardcodeada ni
   commiteada; `.env.example` queda como plantilla.
 - **SDK `google-genai` (no el viejo `google-generativeai`)** — es el paquete

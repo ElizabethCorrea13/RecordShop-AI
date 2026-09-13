@@ -1,0 +1,20 @@
+# Blueprint de Render para el backend. Al crear un "New > Blueprint" en
+# Render y apuntarlo a este repo, lee este archivo solo y arma el servicio.
+#
+# Las variables con "sync: false" no se guardan acá (nunca van al repo) —
+# Render pide completarlas a mano una vez, en su dashboard.
+services:
+  - type: web
+    name: recordshop-ai-backend
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-flash-latest
+      - key: ALLOWED_ORIGIN
+        sync: false

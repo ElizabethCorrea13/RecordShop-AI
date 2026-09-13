@@ -9,6 +9,8 @@ Cómo correrlo (desde la carpeta backend/, con el venv activado):
     uvicorn main:app --reload --port 8001
 """
 
+import os
+
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
@@ -21,15 +23,19 @@ app = FastAPI(title="RecordShop AI API", version="0.1.0")
 
 # CORS = Cross-Origin Resource Sharing. El navegador bloquea por defecto que
 # una página servida desde un origen (ej. http://localhost:5173, donde corre
-# el frontend) haga fetch a otro origen (esta API en el puerto 8001). Este
-# middleware le dice a FastAPI que agregue las cabeceras que autorizan al
-# frontend a llamar a la API.
+# el frontend) haga fetch a otro origen (esta API). Este middleware le dice a
+# FastAPI que agregue las cabeceras que autorizan al frontend a llamar a la API.
 #
-# Se usa una regex para aceptar cualquier puerto de localhost/127.0.0.1: en
-# desarrollo Vite arranca en 5173 pero si ese puerto está ocupado salta al
-# 5174, 5175, etc. Para producción esto habrá que restringirlo al dominio real.
+# En desarrollo se acepta cualquier puerto de localhost/127.0.0.1 vía regex,
+# porque Vite salta de puerto si el anterior está ocupado (5173, 5174, ...).
+# En producción el frontend vive en otro dominio (ej. Vercel), así que ese se
+# agrega aparte, leído de la variable de entorno ALLOWED_ORIGIN — no viene
+# hardcodeado porque no se conoce hasta que el frontend esté deployado.
+ALLOWED_ORIGIN = os.getenv("ALLOWED_ORIGIN")
+
 app.add_middleware(
     CORSMiddleware,
+    allow_origins=[ALLOWED_ORIGIN] if ALLOWED_ORIGIN else [],
     allow_origin_regex=r"http://(localhost|127\.0\.0\.1):\d+",
     allow_methods=["*"],
     allow_headers=["*"],

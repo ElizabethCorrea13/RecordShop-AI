@@ -65,6 +65,8 @@ Copiar `../.env.example` a `backend/.env` y completar:
 
 - `GEMINI_API_KEY` (obligatoria) — se consigue gratis en https://aistudio.google.com/apikey
 - `GEMINI_MODEL` (opcional) — por default usa `gemini-flash-latest`
+- `ALLOWED_ORIGIN` (opcional, solo producción) — URL del frontend deployado,
+  para que CORS lo deje llamar a esta API. No hace falta en local.
 
 ## Estructura
 
