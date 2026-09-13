@@ -39,14 +39,30 @@ recordshop-ai/
 ├── README.md
 ├── .gitignore
 ├── .env.example
+├── scripts/                  # start-dev.ps1 / stop-dev.ps1 (levantar todo local)
 ├── backend/
-│   ├── main.py
+│   ├── main.py                # endpoints: /health, /catalog, /chat
+│   ├── gemini_client.py       # arma el prompt y llama a Gemini (con reintentos)
+│   ├── catalog.py             # carga data/catalogo.json
+│   ├── rate_limit.py          # límite de requests/minuto por IP en /chat
 │   ├── requirements.txt
+│   ├── requirements-dev.txt   # + pytest
+│   ├── pytest.ini
+│   ├── tests/                 # pytest, todo mockeado (no gasta cuota de Gemini)
+│   ├── scripts/
+│   │   └── fetch_covers.py    # busca portadas reales (iTunes Search API)
+│   ├── prompts/
+│   │   └── system_prompt.py
 │   └── data/
-│       └── catalogo.json
+│       └── catalogo.json      # catálogo ficticio, en inglés
 └── frontend/
-    ├── src/
-    └── package.json
+    ├── package.json
+    └── src/
+        ├── App.jsx             # layout: header, catálogo, chat, footer
+        ├── Header.jsx          # menú + logo
+        ├── Footer.jsx          # políticas + disclaimer
+        ├── ProductGrid.jsx     # grilla de productos (consume /catalog)
+        └── Chat.jsx            # interfaz de chat (consume /chat)
 ```
 
 ## Sobre quién trabaja en esto
@@ -64,16 +80,22 @@ Full-stack developer con 2 años de experiencia, cursando Licenciatura en Cienci
 - [x] Catálogo ficticio de productos (JSON) — `data/catalogo.json` con 8 items, en inglés (mismo idioma que `prompts/system_prompt.py`); se pasa completo en cada request a `/chat`
 - [x] Frontend: interfaz de chat básica — `Chat.jsx`, mensajes, input, loading y manejo de error
 - [x] Conectar frontend con backend — ping a `/health` para mostrar el estado de conexión y `Chat.jsx` habla con `POST /chat`
-- [ ] README completo
+- [x] Frontend: página tipo tienda — `Header.jsx` (menú), `ProductGrid.jsx` (catálogo con portadas reales, filtro por género, indicador de stock bajo), `Footer.jsx` (políticas); layout de dos columnas con el chat fijo a la derecha
+- [x] Portadas reales del catálogo — `backend/scripts/fetch_covers.py` las busca en la iTunes Search API y las guarda en `data/catalogo.json`
+- [x] Rate limit propio en `/chat` — `rate_limit.py`, 10 requests/minuto por IP, para no agotar el límite de Gemini (compartido por todos los visitantes)
+- [x] Tests automatizados — `backend/tests/` con `pytest`, 21 tests mockeados (no gastan cuota de Gemini)
+- [x] README completo — qué es, stack, cómo correrlo, decisiones técnicas (raíz + uno por carpeta)
 - [ ] Deploy (a definir: Vercel para front, Render para back)
 
 ### Cómo correrlo localmente
 
-Detalle completo en `README.md`. Resumen: dos terminales.
+Detalle completo en `README.md`. Resumen: dos terminales (o `.\scripts\start-dev.ps1`
+desde la raíz para levantar las dos de una).
 
 - **Backend:** `cd backend` → activar venv → `uvicorn main:app --reload --port 8001`
   → API en http://localhost:8001 (docs en `/docs`)
 - **Frontend:** `cd frontend` → `npm run dev` → http://localhost:5173
+- **Tests del backend:** `cd backend` → `pytest` (no necesita `GEMINI_API_KEY`, todo mockeado)
 
 > **Puerto 8001, no 8000:** en el Windows de la dev el 8000 está reservado por
 > Hyper-V/WSL y `uvicorn` falla con `WinError 10013`. El repo usa 8001 como
