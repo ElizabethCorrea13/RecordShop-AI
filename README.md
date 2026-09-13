@@ -141,9 +141,9 @@ footer con políticas. Probado a mano en el navegador. Falta el deploy.
 ### Políticas de la tienda (ficticias, para este proyecto)
 
 **Envíos:**
-- Estándar: 5-7 días hábiles, $1500
-- Express: 2-3 días hábiles, $3500
-- Gratis en compras +$15000
+- Estándar: 5-7 días hábiles, $1,500
+- Express: 2-3 días hábiles, $3,500
+- Gratis en compras +$15,000
 - Cobertura: todo el país
 
 **Devoluciones:**

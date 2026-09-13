@@ -26,10 +26,14 @@ logger = logging.getLogger(__name__)
 # nueva. Se puede fijar una versión puntual con la variable GEMINI_MODEL.
 MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-flash-latest")
 
-# El tier gratis de Gemini devuelve 503 (modelo saturado) o 429 (rate limit)
-# con bastante frecuencia, y casi siempre son errores transitorios que se
-# resuelven solos unos segundos después. En vez de mostrarle eso al usuario
-# a la primera, reintentamos un par de veces antes de darnos por vencidos.
+# El tier gratis de Gemini devuelve 503 (modelo saturado) con bastante
+# frecuencia, y casi siempre se resuelve solo unos segundos después: vale la
+# pena reintentar un par de veces antes de darnos por vencidos.
+#
+# 429 es otra historia: es el límite de requests por minuto del tier gratis
+# (20/min), y Google pide esperar del orden de 30-60s, no unos segundos —
+# reintentar rápido como con el 503 no sirve de nada, así que para el 429 no
+# reintentamos y directamente avisamos que es un límite de uso, no una caída.
 MAX_RETRIES = 2
 RETRY_DELAY_SECONDS = 1.5
 
@@ -53,11 +57,6 @@ def _get_client() -> genai.Client:
     return _client
 
 
-def _is_transient(error: APIError) -> bool:
-    """503 (saturado) y 5xx en general son de Google; 429 es rate limit."""
-    return isinstance(error, ServerError) or error.code == 429
-
-
 def ask(message: str) -> str:
     """Envía un mensaje del cliente a Gemini con el system prompt y el catálogo."""
     client = _get_client()
@@ -76,7 +75,9 @@ def ask(message: str) -> str:
             return response.text
         except APIError as e:
             last_error = e
-            if not _is_transient(e) or attempt == MAX_RETRIES:
+            if e.code == 429:
+                break  # no sirve reintentar rápido, ver comentario arriba
+            if not isinstance(e, ServerError) or attempt == MAX_RETRIES:
                 break
             logger.warning(
                 "Gemini call failed (%s), retrying %d/%d: %s",
@@ -84,7 +85,14 @@ def ask(message: str) -> str:
             )
             time.sleep(RETRY_DELAY_SECONDS * (attempt + 1))
 
-    logger.error("Gemini call failed after retries: %s", last_error)
+    logger.error("Gemini call failed: %s", last_error)
+
+    if last_error is not None and last_error.code == 429:
+        raise RuntimeError(
+            "The assistant has hit Gemini's free-tier rate limit (requests "
+            "per minute). Please wait about a minute and try again."
+        ) from last_error
+
     raise RuntimeError(
         "The assistant is temporarily unavailable — Gemini's free tier is "
         "under heavy demand right now. Please try again in a moment."

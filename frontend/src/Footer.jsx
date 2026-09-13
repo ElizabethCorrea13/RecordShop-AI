@@ -7,9 +7,9 @@ function Footer() {
         <div>
           <h4>Shipping</h4>
           <ul>
-            <li>Standard: 5-7 business days — $1500</li>
-            <li>Express: 2-3 business days — $3500</li>
-            <li>Free on orders over $15000</li>
+            <li>Standard: 5-7 business days — $1,500</li>
+            <li>Express: 2-3 business days — $3,500</li>
+            <li>Free on orders over $15,000</li>
             <li>Coverage: nationwide</li>
           </ul>
         </div>
