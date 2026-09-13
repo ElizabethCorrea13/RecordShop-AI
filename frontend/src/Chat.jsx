@@ -76,6 +76,10 @@ const Chat = forwardRef(function Chat({ apiUrl }, ref) {
       }
       setMessages((prev) => [...prev, { role: 'assistant', text: data.reply }])
     } catch (err) {
+      // Falló: sacamos el mensaje del historial y lo devolvemos al input,
+      // así no hay que retipearlo para reintentar.
+      setMessages((prev) => prev.slice(0, -1))
+      setInput(text)
       setError(err.message)
     } finally {
       setLoading(false)
