@@ -1,5 +1,7 @@
 # RecordShop-AI
 
+![Demo del chat respondiendo sobre el catálogo](docs/assets/chat-demo.gif)
+
 **🔗 Demo en vivo: [record-shop-ai.vercel.app](https://record-shop-ai.vercel.app/)**
 (el backend gratis de Render "duerme" sin uso — el primer mensaje puede tardar
 30-50s mientras arranca)
